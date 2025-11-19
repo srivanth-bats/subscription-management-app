@@ -8,7 +8,7 @@ export const DashboardHeader = () => {
           <CreditCard className="h-6 w-6 text-primary-foreground" />
         </div>
         <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          SubTracker
+          SubTrack
         </h1>
       </div>
       <p className="text-muted-foreground text-lg ml-[60px]">

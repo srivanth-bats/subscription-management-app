@@ -60,7 +60,7 @@ const Install = () => {
 
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold mb-3 text-foreground">
-                  Install SubTracker
+                  Install SubTrack
                 </h1>
                 <p className="text-lg text-muted-foreground">
                   Get quick access to your subscriptions from your home screen
