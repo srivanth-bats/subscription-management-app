@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "robots.txt", "icon-192.png", "icon-512.png"],
       manifest: {
-        name: "SubTracker - Subscription Manager",
-        short_name: "SubTracker",
+        name: "SubTrack - Subscription Manager",
+        short_name: "SubTrack",
         description: "Track and manage all your recurring subscriptions in one place",
         theme_color: "#0ea5e9",
         background_color: "#ffffff",
