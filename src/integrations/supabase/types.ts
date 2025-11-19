@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      notification_log: {
+        Row: {
+          id: string
+          notification_type: string
+          renewal_date: string
+          sent_at: string
+          subscription_id: string
+        }
+        Insert: {
+          id?: string
+          notification_type: string
+          renewal_date: string
+          sent_at?: string
+          subscription_id: string
+        }
+        Update: {
+          id?: string
+          notification_type?: string
+          renewal_date?: string
+          sent_at?: string
+          subscription_id?: string
+        }
+        Relationships: []
+      }
+      notification_preferences: {
+        Row: {
+          created_at: string
+          email_enabled: boolean
+          hour_before_enabled: boolean
+          id: string
+          push_enabled: boolean
+          subscription_id: string
+          updated_at: string
+          user_email: string | null
+        }
+        Insert: {
+          created_at?: string
+          email_enabled?: boolean
+          hour_before_enabled?: boolean
+          id?: string
+          push_enabled?: boolean
+          subscription_id: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Update: {
+          created_at?: string
+          email_enabled?: boolean
+          hour_before_enabled?: boolean
+          id?: string
+          push_enabled?: boolean
+          subscription_id?: string
+          updated_at?: string
+          user_email?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
