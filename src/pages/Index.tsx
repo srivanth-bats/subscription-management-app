@@ -5,6 +5,7 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { StatsOverview } from "@/components/dashboard/StatsOverview";
 import { SubscriptionList } from "@/components/dashboard/SubscriptionList";
 import { AddSubscriptionDialog } from "@/components/dashboard/AddSubscriptionDialog";
+import { CURRENCIES } from "@/lib/currency";
 
 export interface Subscription {
   id: string;
@@ -54,6 +55,7 @@ const Index = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>(initialSubscriptions);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingSubscription, setEditingSubscription] = useState<Subscription | null>(null);
+  const [currency, setCurrency] = useState<string>("USD");
 
   const handleAddSubscription = (subscription: Omit<Subscription, "id">) => {
     const newSubscription = {
@@ -95,7 +97,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <DashboardHeader />
+        <DashboardHeader currency={currency} onCurrencyChange={setCurrency} />
         
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -108,12 +110,13 @@ const Index = () => {
           </Button>
         </div>
 
-        <StatsOverview subscriptions={subscriptions} />
+        <StatsOverview subscriptions={subscriptions} currency={currency} />
         
         <SubscriptionList
           subscriptions={subscriptions}
           onEdit={handleEditSubscription}
           onDelete={handleDeleteSubscription}
+          currency={currency}
         />
 
         <AddSubscriptionDialog

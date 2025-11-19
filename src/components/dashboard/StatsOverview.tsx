@@ -1,12 +1,14 @@
 import { Subscription } from "@/pages/Index";
 import { DollarSign, TrendingUp, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatCurrency } from "@/lib/currency";
 
 interface StatsOverviewProps {
   subscriptions: Subscription[];
+  currency: string;
 }
 
-export const StatsOverview = ({ subscriptions }: StatsOverviewProps) => {
+export const StatsOverview = ({ subscriptions, currency }: StatsOverviewProps) => {
   const monthlyTotal = subscriptions.reduce((total, sub) => {
     const cost = sub.billingCycle === "monthly" ? sub.cost : sub.cost / 12;
     return sub.status === "active" ? total + cost : total;
@@ -22,7 +24,7 @@ export const StatsOverview = ({ subscriptions }: StatsOverviewProps) => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">Monthly Total</p>
-              <p className="text-3xl font-bold text-foreground">${monthlyTotal.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-foreground">{formatCurrency(monthlyTotal, currency)}</p>
             </div>
             <div className="p-3 rounded-lg bg-primary/10">
               <DollarSign className="h-6 w-6 text-primary" />
@@ -36,7 +38,7 @@ export const StatsOverview = ({ subscriptions }: StatsOverviewProps) => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-1">Yearly Total</p>
-              <p className="text-3xl font-bold text-foreground">${yearlyTotal.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-foreground">{formatCurrency(yearlyTotal, currency)}</p>
             </div>
             <div className="p-3 rounded-lg bg-accent/10">
               <TrendingUp className="h-6 w-6 text-accent" />

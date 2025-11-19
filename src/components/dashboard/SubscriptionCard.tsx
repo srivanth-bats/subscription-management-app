@@ -3,14 +3,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { formatCurrency } from "@/lib/currency";
 
 interface SubscriptionCardProps {
   subscription: Subscription;
   onEdit: () => void;
   onDelete: () => void;
+  currency: string;
 }
 
-export const SubscriptionCard = ({ subscription, onEdit, onDelete }: SubscriptionCardProps) => {
+export const SubscriptionCard = ({ subscription, onEdit, onDelete, currency }: SubscriptionCardProps) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
@@ -47,7 +49,7 @@ export const SubscriptionCard = ({ subscription, onEdit, onDelete }: Subscriptio
 
         <div className="space-y-3 mb-4">
           <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-bold text-foreground">${subscription.cost}</span>
+            <span className="text-3xl font-bold text-foreground">{formatCurrency(subscription.cost, currency)}</span>
             <span className="text-muted-foreground">/{subscription.billingCycle === "monthly" ? "mo" : "yr"}</span>
           </div>
 
