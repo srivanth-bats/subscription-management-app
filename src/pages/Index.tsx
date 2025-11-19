@@ -5,7 +5,14 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { StatsOverview } from "@/components/dashboard/StatsOverview";
 import { SubscriptionList } from "@/components/dashboard/SubscriptionList";
 import { AddSubscriptionDialog } from "@/components/dashboard/AddSubscriptionDialog";
+import { NotificationSettings } from "@/components/dashboard/NotificationSettings";
 import { CURRENCIES } from "@/lib/currency";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export interface Subscription {
   id: string;
@@ -56,6 +63,8 @@ const Index = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingSubscription, setEditingSubscription] = useState<Subscription | null>(null);
   const [currency, setCurrency] = useState<string>("USD");
+  const [notificationDialogOpen, setNotificationDialogOpen] = useState(false);
+  const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null);
 
   const handleAddSubscription = (subscription: Omit<Subscription, "id">) => {
     const newSubscription = {
@@ -94,6 +103,11 @@ const Index = () => {
     setEditingSubscription(null);
   };
 
+  const handleNotificationSettings = (subscription: Subscription) => {
+    setSelectedSubscription(subscription);
+    setNotificationDialogOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -116,6 +130,7 @@ const Index = () => {
           subscriptions={subscriptions}
           onEdit={handleEditSubscription}
           onDelete={handleDeleteSubscription}
+          onNotificationSettings={handleNotificationSettings}
           currency={currency}
         />
 
@@ -125,6 +140,20 @@ const Index = () => {
           onSubmit={editingSubscription ? handleUpdateSubscription : handleAddSubscription}
           editingSubscription={editingSubscription}
         />
+
+        <Dialog open={notificationDialogOpen} onOpenChange={setNotificationDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>Notification Preferences</DialogTitle>
+            </DialogHeader>
+            {selectedSubscription && (
+              <NotificationSettings
+                subscriptionId={selectedSubscription.id}
+                subscriptionName={selectedSubscription.name}
+              />
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
