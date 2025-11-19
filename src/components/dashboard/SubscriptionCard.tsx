@@ -1,7 +1,7 @@
 import { Subscription } from "@/pages/Index";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Calendar } from "lucide-react";
+import { Pencil, Trash2, Calendar, Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency } from "@/lib/currency";
 
@@ -9,10 +9,11 @@ interface SubscriptionCardProps {
   subscription: Subscription;
   onEdit: () => void;
   onDelete: () => void;
+  onNotificationSettings: () => void;
   currency: string;
 }
 
-export const SubscriptionCard = ({ subscription, onEdit, onDelete, currency }: SubscriptionCardProps) => {
+export const SubscriptionCard = ({ subscription, onEdit, onDelete, onNotificationSettings, currency }: SubscriptionCardProps) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
@@ -63,11 +64,18 @@ export const SubscriptionCard = ({ subscription, onEdit, onDelete, currency }: S
           <Button
             variant="outline"
             size="sm"
-            onClick={onEdit}
+            onClick={onNotificationSettings}
             className="flex-1"
           >
-            <Pencil className="h-3 w-3 mr-1" />
-            Edit
+            <Bell className="h-3 w-3 mr-1" />
+            Alerts
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onEdit}
+          >
+            <Pencil className="h-3 w-3" />
           </Button>
           <Button
             variant="outline"

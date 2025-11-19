@@ -5,10 +5,11 @@ interface SubscriptionListProps {
   subscriptions: Subscription[];
   onEdit: (subscription: Subscription) => void;
   onDelete: (id: string) => void;
+  onNotificationSettings: (subscription: Subscription) => void;
   currency: string;
 }
 
-export const SubscriptionList = ({ subscriptions, onEdit, onDelete, currency }: SubscriptionListProps) => {
+export const SubscriptionList = ({ subscriptions, onEdit, onDelete, onNotificationSettings, currency }: SubscriptionListProps) => {
   if (subscriptions.length === 0) {
     return (
       <div className="text-center py-16">
@@ -25,6 +26,7 @@ export const SubscriptionList = ({ subscriptions, onEdit, onDelete, currency }: 
           subscription={subscription}
           onEdit={() => onEdit(subscription)}
           onDelete={() => onDelete(subscription.id)}
+          onNotificationSettings={() => onNotificationSettings(subscription)}
           currency={currency}
         />
       ))}
